@@ -31,9 +31,15 @@ public class HelloController {
 
     @FXML
     protected void calculateResult(){
-        int num1 = Integer.parseInt(number1.getText());
-        int num2 = Integer.parseInt(number2.getText());
-        int res = 0;
+        double num1,num2;
+        try{
+            num1 = Double.parseDouble(number1.getText());
+            num2 = Double.parseDouble(number2.getText());
+        }catch(NumberFormatException e){
+            welcomeText.setText("Error: One of the entries is not a number");
+            return;
+        }
+        double res = 0;
         String operator = operation.getText();
         switch (operator){
             case "+":
@@ -50,6 +56,6 @@ public class HelloController {
                 break;
         }
         result.setText(String.valueOf(res));
-        welcomeText.setText("The result is "+String.valueOf(res));
+        welcomeText.setText("The result is "+ res);
     }
 }
