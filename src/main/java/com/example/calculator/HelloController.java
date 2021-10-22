@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 public class HelloController {
     @FXML
-    private Label welcomeText;
+    private Label resultText;
 
     @FXML
     private Label operation;
@@ -24,23 +24,27 @@ public class HelloController {
 
     @FXML
     protected void setOperator(ActionEvent e){
-        Button b = (Button) e.getSource();
-        operation.setText(b.getText());
+        Button b = (Button) e.getSource(); //Get button that initiated the action
+        operation.setText(b.getText()); // Set operator from button text
     }
 
 
     @FXML
     protected void calculateResult(){
-        double num1,num2;
+        double num1,num2; //declare two variables as double for decimal values
+
+        //check if text is valid number. If not throw exception and end the action
         try{
             num1 = Double.parseDouble(number1.getText());
             num2 = Double.parseDouble(number2.getText());
         }catch(NumberFormatException e){
-            welcomeText.setText("Error: One of the entries is not a number");
+            resultText.setText("Error: One of the entries is not a number");
             return;
         }
         double res = 0;
         String operator = operation.getText();
+
+        //perform calculation based on operator
         switch (operator){
             case "+":
                 res = num1 + num2;
@@ -56,6 +60,8 @@ public class HelloController {
                 break;
         }
         result.setText(String.valueOf(res));
-        welcomeText.setText("The result is "+ res);
+
+        //display result
+        resultText.setText("The result is "+ res);
     }
 }
